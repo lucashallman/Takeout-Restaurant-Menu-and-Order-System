@@ -62,8 +62,14 @@ def place_order(menu):
                 i += 1
 
         # TODO: Ask customer to input menu item number
-        menu_selection = int(input('Please input item number to order: '))
+        menu_selection = input('Please input item number to order: ')
         # TODO: Update the order list using the update_order function
+
+        if type(menu_selection) == int or type(menu_selection) == float:
+            menu_selection = int(menu_selection)
+        else:
+            print('Invalid input.')
+            menu_selection = 1
         update_order(order_list, menu_selection, menu_items)
         # TODO: Send the order list, menu selection, and menu items as arguments
 
@@ -122,13 +128,16 @@ def update_order(order, menu_selection, menu_items):
         selection = menu_items[menu_selection]
         print(selection)
         # TODO: Ask the customer for the quantity of the menu item
-        quantity = int(input(f'How many {selection['Item name']}(s) would you like to order?') or 1)
+        quantitySelect = input(f'How many {selection['Item name']}(s) would you like to order?')
         # TODO: Use the item name variable in the question
-
-
+        
+        
         # TODO: Check if the quantity is a number, default to 1 if not
-
-
+        if type(quantitySelect) == int or type(quantitySelect) == float:
+            quantity = int(quantitySelect)
+        else:
+            print('Invalid input.')
+            quantity = 1
         # TODO: Add a dictionary to the order list 
         # TODO: The dictionary should include the item name, price, and quantity
         # TODO: Use the following names for the dictionary keys:
@@ -167,8 +176,8 @@ def print_itemized_receipt(receipt):
     # TODO: Loop through the items in the customer's receipt
     for item in receipt:
         # TODO Store the dictionary items as variables
-        name, price, quantity = item
-        print_receipt_line(name, price, quantity)
+
+        print_receipt_line(item['Item name'], item['Price'], item['Quantity'])
 
         # TODO: Print the receipt line using the print_receipt_line function
         # TODO: Send the item name, price, and quantity as separate arguments
